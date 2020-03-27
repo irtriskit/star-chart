@@ -102,28 +102,42 @@ li:hover {
   margin: 10px;
   padding: 5px;
   width: 12%;
-  line-height: 1.5;
   vertical-align: top;
 }
 
 .movie img {
   border: 2px solid #eee;
   width: 100%;
+  max-width: 150px;
 }
 
 .movie .movie-details {
   padding: 5px;
 }
 
+.movie span {
+  padding: 2px 0;
+  display: inline-block;
+}
+
 .movie span.movie-title {
   display: block;
   font-weight: bold;
-  padding-bottom: 2px;
 }
 
 #auto-complete-results li .movie img {
   width: auto;
   height: 40px;
+}
+
+.actor img {
+  border: 2px solid #eee;
+  width: 100%;
+  max-width: 75px;
+}
+
+.role {
+  text-align: center;
 }
 
 /* End Search Panel */
@@ -162,7 +176,8 @@ tr.actor-row {
 }
 
 th {
-  vertical-align: bottom;
+  vertical-align: top;
+  font-weight: normal;
 }
 
 td, th {
@@ -182,16 +197,6 @@ td.role {
 
 td .star {
   font-size:60px;
-}
-
-th img {
-  height:200px;
-  border: 2px solid #eee;
-}
-
-td img {
-  height:100px;
-  border: 2px solid #eee;
 }
 
  /* Tooltip container */
