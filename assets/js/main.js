@@ -3,7 +3,6 @@ const api_path = "https://api.themoviedb.org/3";
 const image_path = "https://image.tmdb.org/t/p/original";
 
 let results = {
-    "movies" : [],
     "actors" : [],
 };
 
@@ -29,23 +28,34 @@ const findMovie = async function()
     let counter = 0;
 
     for (let result of response.results) {
-        let name = (result.media_type === 'movie') ? result.title : result.name;
-        let release_date = (result.media_type === 'movie') ? new Date(Date.parse(result.release_date)) : new Date(Date.parse(result.first_air_date));
-        let image = "";
-
-        if (result.poster_path)
+        if (result.media_type != "person")
         {
-            image = `${image_path}${result.poster_path}`;
-        } else {
-            image = "assets/images/placeholder.png";
-        }
+            let image = "";
+            if (result.poster_path)
+            {
+                image = `${image_path}${result.poster_path}`;
+            } else {
+                image = "assets/images/placeholder.png";
+            }
 
-        html += `<li onclick="addSearchItem(this)" class="find-result" data-type="${result.media_type}" data-id="${result.id}" data-name="${name}" data-image="${image}" data-release-date="${release_date}"><img alt="${name}" src="${image}" /> ${name} (${getMediaTypeDescription(result.media_type)}) [${release_date.getFullYear()}]</li>`;
-        counter++
+            let item = {
+                "type" : result.media_type,
+                "id" : result.id,
+                "name" : (result.media_type === 'movie') ? result.title : result.name,
+                "image" : image,
+                "release_year" : parseInt((result.media_type === 'movie') ? new Date(Date.parse(result.release_date)).getFullYear() : new Date(Date.parse(result.first_air_date)).getFullYear()),
+            };
 
-        // only want to add first 6 items
-        if (counter > 5) {
-          break;
+            html += `<li onclick="addSearchItem(this)" class="item-to-search" data-type="${item.type}" data-id="${item.id}" data-name="${item.name}" data-image="${item.image}" data-release-year="${item.release_year}">`;
+            html += getMovieComponent(item);
+            html += `</li>`;
+
+            counter++
+
+            // only want to add first 6 items
+            if (counter > 5) {
+                break;
+            }
         }
     }
 
@@ -55,10 +65,6 @@ const findMovie = async function()
     el.innerHTML = html;
 }
 
-const getMediaTypeDescription = function (type) {
-    return(type === 'movie') ? "Movie" : "TV Series";
-}
-
 const updateSearchItems = function() {
 
     let html = "";
@@ -66,7 +72,9 @@ const updateSearchItems = function() {
     html += "<ul>";
 
     search.items.forEach(item => {
-        html += `<li onclick="removeSearchItem(this)" class="item-to-search" data-type="${item.type}" data-id="${item.id}" data-name="${item.name}" data-image="${item.image}" data-release-date="${item.release_date}"><img alt="${item.name}" src="${item.image}" />${name} (${getMediaTypeDescription(item.type)}) [${item.release_date.getFullYear()}]</li>`;
+        html += `<li onclick="removeSearchItem(this)" class="item-to-search" data-type="${item.type}" data-id="${item.id}" data-name="${item.name}" data-image="${item.image}" data-release-year="${item.release_year}">`;
+        html += getMovieComponent(item);
+        html += `</li>`;
     });
 
     html += "</ul>";
@@ -86,7 +94,7 @@ const addSearchItem = function (el) {
             "id" : parseInt(el.getAttribute("data-id")),
             "name" : el.getAttribute("data-name"),
             "image" : el.getAttribute("data-image"),
-            "release_date" : new Date(el.getAttribute("data-release-date")),
+            "release_year" : parseInt(el.getAttribute("data-release-year")),
         };
     
         search.items.push(item);
@@ -172,16 +180,6 @@ const getData = async function()
             // get movie credits data
             let creditsData = await getMovieCredits(item.type, item.id);
 
-            // save movie data for header
-            let movie = {
-                "id" : item.id,
-                "image" : movieData.poster_path,
-                "name" : movieData.title,
-                "type" : "Movie",
-            };
-
-            results.movies.push(movie);
-
             // add actors to result set
             creditsData.cast.forEach(person => {
 
@@ -223,14 +221,6 @@ const getData = async function()
 
             // get tv show
             let tvData = await getMovieOrShow(item.type, item.id);
-
-            // save tv show data for header
-            let tvShow = {
-                "id" : item.id,
-                "image" : tvData.poster_path,
-                "name" : tvData.name,
-                "type" : "TV Series",
-            };
 
             // iterate over show seasons
             tvData.seasons.forEach(async season => {
@@ -319,109 +309,7 @@ const getData = async function()
                     }
                 });
             });   
-
-            results.movies.push(tvShow);
-
         }
     }))
     .then(printTable);
-}
-
-const findMovieOrShow = async function(query) {
-    let response = await fetch(`${api_path}/search/multi?api_key=${api_key}&query=${query}`);
-    let data = await response.json();
-    return data;
-}
-
-const getMovieOrShow = async function(type, id) {
-    let response = await fetch(`${api_path}/${type}/${id}?api_key=${api_key}`);
-    let data = await response.json();
-    return data;
-}
-
-const getMovieCredits = async function(type, id) {
-    let response = await fetch(`${api_path}/${type}/${id}/credits?api_key=${api_key}`);
-    let data = await response.json();
-    return data;
-}
-
-const getTvSeason = async function(type, id, season_number) {
-    let response = await fetch(`${api_path}/${type}/${id}/season/${season_number}?api_key=${api_key}`);
-    let data = await response.json();
-    return data;
-}
-
-const getTvSeasonEpisodeCredits = async function(type, id, season_number, episode_number) {
-    let response = await fetch(`${api_path}/${type}/${id}/season/${season_number}/episode/${episode_number}/credits?api_key=${api_key}`);
-    let data = await response.json();
-    return data;
-}
-
-const printTable = function()
-{
-    let html = "";
-
-    html += "<table>";
-    html += "   <thead>";
-    html += "       <tr class='header-row'>";
-
-    html += "           <th>";
-    // html += "               Sort by:";
-    // html += "               <select>";
-    // html += "                   <option>Matches Most-Least</option>";
-    // html += "                   <option>Matches Least-Most</option>";
-    // html += "                   <option>Name A-Z</option>";
-    // html += "                   <option>Name Z-A</option>";
-    // html += "               </select>";
-    html += "           </th>";
-    
-    results.movies.forEach(movie => {
-        html += "           <th>";
-        // TODO: add first_air_date/release_date
-        html += `               <img alt="${movie.name}" src="${image_path}/${movie.image}" />`;
-        html += `               <span class="subtitle">(${movie.type})</span>`;
-        html += "           </th>";
-    });
-
-    html += "       </tr>";
-    html += "   </thead>";
-    html += "   <tbody>";
-
-    results.actors.forEach(actor => {
-
-        // only show actors that match more than one movie
-        if (actor.roles.length > 1)
-        {
-            html += "       <tr class='actor-row'>";
-            html += "           <td class='actor'>";
-            html += (actor.image) ?  `<img src="${image_path}/${actor.image}" />` : "";
-            html += `               <h3>${actor.name}</h3>`;
-            html += "           </td>";
-
-            results.movies.forEach(movie => {
-
-                html += "           <td class='role'>";
-
-                let role = actor.roles.filter(function(e) { return e.movie_id === movie.id; });
-
-                if (role.length > 0) {
-                    html += "               <div class='tooltip'><span class='star'>&#9733</span>";
-                    html += `                   <span class="tooltiptext">${role[0].role_description}</span>`;
-                    html += "               </div>";
-                }
-
-                html += "           </td>";
-
-            })
-
-            html += "       </tr>";
-
-        }
-    });
-
-    html += "   </tbody>";
-    html += "</table>";
-
-    let el = document.querySelector("#results");
-    el.innerHTML = html;
 }
