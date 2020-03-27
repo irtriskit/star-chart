@@ -81,11 +81,13 @@ h1 + subtitle {
   margin: 10px;
   padding: 5px;
   width: 12%;
+  line-height: 1.5;
 }
 
 #items-to-search li img {
   border: 2px solid #eee;
-  height:200px;
+  width: 100%;
+  margin-bottom: 10px;
 }
 
 button {
