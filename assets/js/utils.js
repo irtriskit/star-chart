@@ -1,5 +1,15 @@
-const printTable = function()
-{
+const image_path = "https://image.tmdb.org/t/p/original";
+
+const handleImage = function (image) {
+    if (image)
+    {
+        return `${image_path}${image}`;
+    } else {
+        return "assets/images/placeholder.png";
+    }
+}
+
+const printTable = function () {
     let html = "";
 
     html += "<table>";

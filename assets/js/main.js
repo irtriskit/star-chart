@@ -1,6 +1,5 @@
 const api_key = "5eb10b8767980a1dc795085504be699c";
 const api_path = "https://api.themoviedb.org/3";
-const image_path = "https://image.tmdb.org/t/p/original";
 
 let results = {
     "actors" : [],
@@ -30,19 +29,11 @@ const findMovie = async function()
     for (let result of response.results) {
         if (result.media_type != "person")
         {
-            let image = "";
-            if (result.poster_path)
-            {
-                image = `${image_path}${result.poster_path}`;
-            } else {
-                image = "assets/images/placeholder.png";
-            }
-
             let item = {
                 "type" : result.media_type,
                 "id" : result.id,
                 "name" : (result.media_type === 'movie') ? result.title : result.name,
-                "image" : image,
+                "image" : handleImage(result.poster_path),
                 "release_year" : parseInt((result.media_type === 'movie') ? new Date(Date.parse(result.release_date)).getFullYear() : new Date(Date.parse(result.first_air_date)).getFullYear()),
             };
 
@@ -188,7 +179,7 @@ const getData = async function()
 
                     let actorData = {
                         "id" : person.id,
-                        "image" : person.profile_path,
+                        "image" : handleImage(person.profile_path),
                         "name" : person.name,
                         "roles" : [],
                     };
@@ -242,7 +233,7 @@ const getData = async function()
 
                             let actorData = {
                                 "id" : person.id,
-                                "image" : person.profile_path,
+                                "image" : handleImage(person.profile_path),
                                 "name" : person.name,
                                 "roles" : [],
                             };
@@ -279,7 +270,7 @@ const getData = async function()
 
                                 let actorData = {
                                     "id" : person.id,
-                                    "image" : person.profile_path,
+                                    "image" : handleImage(person.profile_path),
                                     "name" : person.name,
                                     "roles" : [],
                                 };
