@@ -4,9 +4,11 @@ const getMovieComponent = function(movie) {
 
     html += `   <div class="movie">`;
     html += `       <img class="movie-image" alt="${movie.name}" src="${movie.image}" />`;
-    html += `       <span class="movie-title">${movie.name}</span>`;
-    html += `       <span class="movie-type">(${getMovieTypeDescription(movie.type)})</span>`;
-    html += `       <span class="movie-release-year">[${movie.release_year}]</span>`;
+    html += `       <div class="movie-details">`;
+    html += `           <span class="movie-title">${movie.name}</span>`;
+    html += `           <span class="movie-type">(${getMovieTypeDescription(movie.type)})</span>`;
+    html += `           <span class="movie-release-year">[${movie.release_year}]</span>`;
+    html += `       </div>`;
     html += `   </div>`;
 
     return html;
