@@ -1,0 +1,41 @@
+<html>
+
+	<head>		
+
+		<meta charset="UTF-8">
+		<title>&#9733; Star Chart &#9733;</title>
+		<link rel="stylesheet" href="assets/css/styles.css" type="text/css" />
+		<script src="assets/js/main.js"></script>
+		
+	</head>
+	
+	<body>
+		
+		<h1><span class="star">&#9733;</span> <span class="star">&#9733;</span> <span class="star">&#9733;</span> Star Chart <span class="star">&#9733;</span> <span class="star">&#9733;</span> <span class="star">&#9733;</span></h1>
+		<subtitle>How do your favorite movies and tv shows align?</subtitle>
+
+		<div id="search-panel">
+
+			<div class="autocomplete">
+				<input type="text" id="search" placeholder="Type in a title to begin your search..."></input>
+				<div id="auto-complete-results"></div>				
+			</div>
+
+			<div id="items-to-search"></div>
+
+			<label for="compare-button">Choose between 2 and 6 items to compare</label>
+			<button id="compare-button" onclick="getData()">Compare</button>
+
+		</div>
+
+		<div id="results-panel">
+
+			<button>Go Back</button>
+			
+			<div id="results"></div>
+
+		</div>
+		
+	</body>
+	
+</html>

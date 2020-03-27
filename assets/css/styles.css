@@ -1,0 +1,204 @@
+body {
+  text-align: center;
+  background: #111;
+  color: #eee;
+  font-family: sans-serif;
+}
+
+h1 {
+  margin-bottom: 5px;
+}
+
+h1 .star {
+  font-size: 15px;
+  vertical-align: middle;
+}
+
+h1 + subtitle {
+  font-size: 1em;
+}
+
+.star {
+  color: #ed0;
+}
+
+#search-panel {
+  margin-top: 50px;
+}
+
+#search-panel label {
+  display: block;
+  padding-bottom: 10px;
+}
+
+#search-panel input {
+  padding: 5px;
+  width: 100%;
+  font-size: 1.25em;
+}
+
+.autocomplete {
+  position: relative;
+  width: 50%;
+  margin: 0 auto;
+}
+
+#auto-complete-results {
+  background: #eee;
+  color: #111;
+  position: absolute;
+  width: 100%;
+}
+
+#auto-complete-results ul {
+  list-style-type: none;
+  text-align: left;  
+  padding: 0;
+  margin: 0;
+}
+
+#auto-complete-results li {
+  padding: 5px;
+  border-bottom: 1px solid #111;
+  vertical-align: middle;
+}
+
+#auto-complete-results li img {
+  height: 40px;
+}
+
+#items-to-search {
+  margin: 20px;
+}
+
+#items-to-search ul {
+  padding: 0;
+  margin: 0;
+}
+
+#items-to-search li {
+  display: inline-block;
+  margin: 10px;
+  padding: 5px;
+  width: 12%;
+}
+
+#items-to-search li img {
+  border: 2px solid #eee;
+  height:200px;
+}
+
+button {
+  margin-top:20px;
+  font-size: 1em;
+}
+
+table {
+  border-collapse: collapse;
+  border: none;
+	margin-left:auto; 
+  margin-right:auto;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.subtitle {
+  display: block;
+  padding:20px 0 10px;
+}
+
+tr td,
+table > thead > tr.header-row
+{
+    background-color: #111;
+}
+
+tr:nth-child(even) td:nth-child(odd), 
+tr:nth-child(odd) td:nth-child(even)
+{
+    background-color: #222;
+}
+
+tr.actor-row {
+  border-top: 2px solid #eee;
+  border-bottom: 2px solid #eee;
+}
+
+th {
+  vertical-align: bottom;
+}
+
+td, th {
+  padding: 10px;
+  width: 13%;
+}
+
+td.actor {
+  width:18%;
+  text-align: right;
+}
+
+td.role {
+  text-align: center;
+  vertical-align: middle;
+}
+
+td .star {
+  font-size:60px;
+}
+
+th img {
+  height:200px;
+  border: 2px solid #eee;
+}
+
+td img {
+  height:100px;
+  border: 2px solid #eee;
+}
+
+ /* Tooltip container */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+} 
