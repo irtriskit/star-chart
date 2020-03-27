@@ -36,6 +36,10 @@ button {
 	display: block;
 }
 
+li:hover {
+  cursor: pointer;
+}
+
 /* Search Panel */
 
 #search-panel {
@@ -108,8 +112,7 @@ button {
 }
 
 .movie .movie-details {
-  padding-left: 5px;
-  vertical-align: center;
+  padding: 5px;
 }
 
 .movie span.movie-title {
