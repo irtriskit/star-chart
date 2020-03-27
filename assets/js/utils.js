@@ -1,6 +1,6 @@
 const image_path = "https://image.tmdb.org/t/p/original";
 
-const handleImage = function (image) {
+const handleImage = function(image) {
 
     if (image)
     {
@@ -8,10 +8,10 @@ const handleImage = function (image) {
     } else {
         return "assets/images/placeholder.png";
     }
-    
+
 }
 
-const printTable = function () {
+const printTable = function() {
 
     let html = "";
 
@@ -66,3 +66,18 @@ const printTable = function () {
     el.innerHTML = html;
 
 }
+
+// Show an element
+var show = function(elem) {
+	elem.classList.add('is-visible');
+};
+
+// Hide an element
+var hide = function(elem) {
+	elem.classList.remove('is-visible');
+};
+
+// Toggle element visibility
+var toggle = function(elem) {
+	elem.classList.toggle('is-visible');
+};

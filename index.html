@@ -6,6 +6,9 @@
 		<title>&#9733; Star Chart &#9733;</title>
 		<link rel="stylesheet" href="assets/css/styles.css" type="text/css" />
 		<script src="assets/js/main.js"></script>
+		<script src="assets/js/api.js"></script>
+		<script src="assets/js/utils.js"></script>
+		<script src="assets/js/components.js"></script>
 		
 	</head>
 	
@@ -14,7 +17,7 @@
 		<h1><span class="star">&#9733;</span> <span class="star">&#9733;</span> <span class="star">&#9733;</span> Star Chart <span class="star">&#9733;</span> <span class="star">&#9733;</span> <span class="star">&#9733;</span></h1>
 		<subtitle>How do your favorite movies and tv shows align?</subtitle>
 
-		<div id="search-panel">
+		<div id="search-panel" class="toggle-content">
 
 			<div class="autocomplete">
 				<input type="text" id="search" placeholder="Type in a title to begin your search..."></input>
@@ -24,14 +27,15 @@
 			<div id="items-to-search"></div>
 
 			<label for="compare-button">Choose between 2 and 6 items to compare</label>
-			<button id="compare-button" onclick="getData()">Compare</button>
+			<button id="compare-button" onclick="compare()">Compare</button>
 
 		</div>
 
-		<div id="results-panel">
+		<div id="results-panel" class="toggle-content">
 
-			<button>Go Back</button>
-			
+			<button onclick="goBack()">Go Back</button>
+			<button onclick="printTable()">Refresh Table</button>
+
 			<div id="results"></div>
 
 		</div>

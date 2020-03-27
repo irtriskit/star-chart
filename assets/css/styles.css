@@ -5,6 +5,10 @@ body {
   font-family: sans-serif;
 }
 
+.star {
+  color: #ed0;
+}
+
 h1 {
   margin-bottom: 5px;
 }
@@ -18,9 +22,21 @@ h1 + subtitle {
   font-size: 1em;
 }
 
-.star {
-  color: #ed0;
+button {
+  margin-top: 20px;
+  font-size: 1em;
+  padding: 5px;
 }
+
+.toggle-content {
+	display: none;
+}
+
+.toggle-content.is-visible {
+	display: block;
+}
+
+/* Search Panel */
 
 #search-panel {
   margin-top: 50px;
@@ -90,10 +106,9 @@ h1 + subtitle {
   margin-bottom: 10px;
 }
 
-button {
-  margin-top:20px;
-  font-size: 1em;
-}
+/* End Search Panel */
+
+/* Results Panel */
 
 table {
   border-collapse: collapse;
@@ -204,3 +219,5 @@ td img {
   visibility: visible;
   opacity: 1;
 } 
+
+/* End Results Panel */

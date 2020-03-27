@@ -1,4 +1,4 @@
-const getMovieComponent = function (movie) {
+const getMovieComponent = function(movie) {
 
     let html = "";
 
@@ -13,7 +13,7 @@ const getMovieComponent = function (movie) {
 
 }
 
-const getMovieTypeDescription = function (type) {return(type === 'movie') ? "Movie" : "TV Series"};
+const getMovieTypeDescription = function(type) {return(type === 'movie') ? "Movie" : "TV Series"};
 
 const getActorComponent = function (actor) {
 
@@ -28,7 +28,7 @@ const getActorComponent = function (actor) {
 
 }
 
-const getRoleComponent = function (role) {
+const getRoleComponent = function(role) {
 
     let html = "";
 

@@ -75,7 +75,7 @@ const updateSearchItems = function() {
 
 }
 
-const addSearchItem = function (el) {
+const addSearchItem = function(el) {
     // TODO: prevent them from adding the same thing twice
 
     if (search.items.length < 6)
@@ -98,7 +98,7 @@ const addSearchItem = function (el) {
     clearAutoComplete();
 }
 
-const clearAutoComplete = function () {
+const clearAutoComplete = function() {
     let el = document.querySelector("#auto-complete-results");
     el.innerHTML = "";
 
@@ -106,7 +106,7 @@ const clearAutoComplete = function () {
     el.value = "";
 }
 
-const removeSearchItem = function (el) {
+const removeSearchItem = function(el) {
 
     let searchItem = {
         "type" : el.getAttribute("data-type"),
@@ -145,15 +145,39 @@ document.addEventListener("DOMContentLoaded", async function() {
         findMovie();
     }
 
+    // show the search panel to start
+    show(document.querySelector("#search-panel"));
+
+    // hide the results panel to start
+    hide(document.querySelector("#results-panel"));
+
 });
 
-const getData = async function()
-{
+const compare = async function() {
+
     // validate they have enough items
     if (search.items.length < 2) {
         alert("You have to compare at least 2 items!");
         return;
     }
+    
+    await getData()
+        .then(hide(document.querySelector("#search-panel")))
+        .then(show(document.querySelector("#results-panel")))
+        .then(printTable);
+}
+
+const goBack = function() {
+
+    // show the search panel
+    show(document.querySelector("#search-panel"));
+
+    // hide the results panel
+    hide(document.querySelector("#results-panel"));
+
+}
+
+const getData = async function() {
 
     // clear results
     results = {
@@ -301,6 +325,5 @@ const getData = async function()
                 });
             });   
         }
-    }))
-    .then(printTable);
+    }));
 }
