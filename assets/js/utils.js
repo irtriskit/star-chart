@@ -1,30 +1,24 @@
 const image_path = "https://image.tmdb.org/t/p/original";
 
 const handleImage = function (image) {
+
     if (image)
     {
         return `${image_path}${image}`;
     } else {
         return "assets/images/placeholder.png";
     }
+    
 }
 
 const printTable = function () {
+
     let html = "";
 
     html += "<table>";
     html += "   <thead>";
     html += "       <tr class='header-row'>";
-
-    html += "           <th>";
-    // html += "               Sort by:";
-    // html += "               <select>";
-    // html += "                   <option>Matches Most-Least</option>";
-    // html += "                   <option>Matches Least-Most</option>";
-    // html += "                   <option>Name A-Z</option>";
-    // html += "                   <option>Name Z-A</option>";
-    // html += "               </select>";
-    html += "           </th>";
+    html += "           <th>&nbsp;</th>";
     
     search.items.forEach(movie => {
         html += "           <th>";
@@ -70,4 +64,5 @@ const printTable = function () {
 
     let el = document.querySelector("#results");
     el.innerHTML = html;
+
 }

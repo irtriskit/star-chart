@@ -13,9 +13,7 @@ const getMovieComponent = function (movie) {
 
 }
 
-const getMovieTypeDescription = function (type) {
-    return(type === 'movie') ? "Movie" : "TV Series";
-}
+const getMovieTypeDescription = function (type) {return(type === 'movie') ? "Movie" : "TV Series"};
 
 const getActorComponent = function (actor) {
 
