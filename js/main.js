@@ -76,13 +76,21 @@ const updateSearchItems = function() {
 }
 
 const addSearchItem = function(el) {
-    // TODO: prevent them from adding the same thing twice
+
+    let id = parseInt(el.getAttribute("data-id"));
+
+    // need to prevent them from adding the same thing twice
+    if (search.items.filter(function(e) { return e.id === id; }).length > 0) {
+        alert("You have already chosen that item!");
+        clearAutoComplete();
+        return;
+    }  
 
     if (search.items.length < 6)
     {
         let item = {
             "type" : el.getAttribute("data-type"),
-            "id" : parseInt(el.getAttribute("data-id")),
+            "id" : id,
             "name" : el.getAttribute("data-name"),
             "image" : el.getAttribute("data-image"),
             "release_year" : parseInt(el.getAttribute("data-release-year")),
