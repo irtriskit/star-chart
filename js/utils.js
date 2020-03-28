@@ -6,7 +6,7 @@ const handleImage = function(image) {
     {
         return `${image_path}${image}`;
     } else {
-        return "assets/images/placeholder.png";
+        return "images/placeholder.png";
     }
 
 }

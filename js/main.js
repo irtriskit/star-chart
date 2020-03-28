@@ -153,6 +153,11 @@ document.addEventListener("DOMContentLoaded", async function() {
 
 });
 
+document.addEventListener("click", function(event) {
+    if (event.target.closest("#auto-complete-results")) return;
+    clearAutoComplete();
+});
+
 const compare = async function() {
 
     // validate they have enough items
