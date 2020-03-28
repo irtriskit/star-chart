@@ -11,6 +11,20 @@ const handleImage = function(image) {
 
 }
 
+const sortActors = function(a,b) {
+
+    if (a.roles.length < b.roles.length){
+        return 1
+    }
+
+    if (a.roles.length > b.roles.length){
+        return -1
+    }
+
+    return 0;
+    
+}
+
 const printTable = function() {
 
     // handle an empty state
@@ -32,6 +46,9 @@ const printTable = function() {
     html += "       </tr>";
     html += "   </thead>";
     html += "   <tbody>";
+
+    // sort the actors, most roles first
+    results.actors.sort(sortActors);
 
     results.actors.forEach(actor => {
 
