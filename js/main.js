@@ -112,6 +112,8 @@ const clearAutoComplete = function() {
 
     el = document.querySelector("#search");
     el.value = "";
+
+    el.focus();
 }
 
 const removeSearchItem = function(el) {
