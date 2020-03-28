@@ -13,6 +13,9 @@ const handleImage = function(image) {
 
 const printTable = function() {
 
+    // handle an empty state
+    let hasActors = false;
+
     let html = "";
 
     html += "<table>";
@@ -56,8 +59,17 @@ const printTable = function() {
 
             html += "       </tr>";
 
+            hasActors = true;
+
         }
     });
+
+    if (!hasActors) {
+        // add empty row
+        html += "       <tr>";
+        html += `           <td colspan="${search.items.length + 1}" class="none-found">No matches found</td>`;
+        html += "       </tr>";
+    }
 
     html += "   </tbody>";
     html += "</table>";

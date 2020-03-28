@@ -28,6 +28,10 @@ button {
   padding: 5px;
 }
 
+p {
+  font-size: .8em;
+}
+
 .toggle-content {
 	display: none;
 }
@@ -204,6 +208,12 @@ td.actor {
 td.role {
   text-align: center;
   vertical-align: middle;
+}
+
+td.none-found {
+  text-align:center;
+  color: #ed0;
+  padding: 40px
 }
 
 td .star {
