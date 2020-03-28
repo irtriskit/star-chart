@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 
     //setup before functions
     let typingTimer;                //timer identifier
-    let doneTypingInterval = 2000;  //time in ms (2 seconds)
+    let doneTypingInterval = 1000;  //time in ms (1 seconds)
     let myInput = document.getElementById('search');
 
     //on keyup, start the countdown
